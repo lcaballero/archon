@@ -1,0 +1,32 @@
+@startuml
+
+title Components
+
+participant Tty
+
+note left of Tty
+System level events
+are produced by the
+/dev/tty and surfaced
+to terminal via channels
+end note
+
+
+Tty -> Terminal : WindowsSizeChange Event
+Terminal -> Editor : WindowSizeChange Event
+|||
+Tty -> Terminal : KeyBoard Event
+Terminal -> Editor : KeyBoard Event
+Editor -> Grid : Characters
+|||
+|||
+Grid -> Editor : RenderBuffer
+Editor -> Terminal : RenderBuffer
+Terminal -> Tty : WriteBytes
+|||
+Editor -> Editor : Exit Editor
+|||
+Terminal -> Terminal : Quit Event
+
+
+@enduml
