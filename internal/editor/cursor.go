@@ -1,12 +1,11 @@
 package editor
 
-
 type Cursor struct {
 	x, y int
 }
 
 func NewCursor(x, y int) *Cursor {
-	return &Cursor{ x:x, y:y }
+	return &Cursor{x: x, y: y}
 }
 
 func (c *Cursor) Pos() (int, int) {

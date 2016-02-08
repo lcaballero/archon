@@ -4,7 +4,6 @@ import (
 	"github.com/lcaballero/archon/internal/grid"
 )
 
-
 type GridWriter interface {
 	Set(x, y int, b grid.Cell) error
 }

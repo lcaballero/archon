@@ -1,9 +1,10 @@
 package grid
 
 import (
-	"io"
-	"github.com/lcaballero/archon/internal/sys/terminal"
 	"bytes"
+	"io"
+
+	"github.com/lcaballero/archon/internal/sys/terminal"
 )
 
 type GridWriter interface {
@@ -20,7 +21,7 @@ func NewGrid(w, h int) *Grid {
 	for i := 0; i < h; i++ {
 		runes[i] = make([]Cell, w)
 		for j := 0; j < w; j++ {
-			runes[i][j] = Cell{Byte:' '}
+			runes[i][j] = Cell{Byte: ' '}
 		}
 	}
 
@@ -36,8 +37,8 @@ func NewGrid(w, h int) *Grid {
 //TODO: figure out a way to not need a copy.
 func CopyGrid(g *Grid) *Grid {
 	rv := &Grid{
-		w: g.w,
-		h: g.h,
+		w:     g.w,
+		h:     g.h,
 		runes: g.ToWritable(),
 	}
 	return rv

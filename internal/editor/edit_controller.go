@@ -9,7 +9,6 @@ import (
 	"github.com/lcaballero/archon/internal/view"
 )
 
-
 type EditController struct {
 	atts       *view.ViewAtts
 	onRender   chan io.WriterTo
@@ -64,7 +63,6 @@ func (d *EditController) Handle(ev terminal.Event) error {
 		d.onRender <- grid.CopyGrid(d.grid)
 	}
 
-
 	return nil
 }
 
@@ -82,10 +80,10 @@ func (d *EditController) handleKey(
 		log.Println("KeyDelete")
 		b = ' '
 		d.cursor.Left()
-		x, y = d.cursor.Pos()   // resets going leftward
+		x, y = d.cursor.Pos() // resets going leftward
 	default:
 		d.cursor.Right()
 	}
 
-	return x, y, grid.Cell{ Byte: b }
+	return x, y, grid.Cell{Byte: b}
 }

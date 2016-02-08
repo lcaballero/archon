@@ -44,7 +44,7 @@ const (
 	KeyF11
 	KeyF12
 	KeyInsert
-	KeyDelete_1         // KeyDelete
+	KeyDelete_1 // KeyDelete
 	KeyHome
 	KeyEnd
 	KeyPgup

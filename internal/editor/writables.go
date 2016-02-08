@@ -2,14 +2,15 @@ package editor
 
 import "io"
 
-
 type WritableString string
+
 func (w WritableString) WriteTo(out io.Writer) (int64, error) {
 	n, err := out.Write([]byte(w))
 	return int64(n), err
 }
 
 type GridWritable [][]byte
+
 func (g GridWritable) WriteTo(w io.Writer) (int64, error) {
 	var total int64 = 0
 	h := len(g)

@@ -124,10 +124,10 @@ func (esc *EscapeSeqs) MouseExit() string {
 	return esc.Escapes[seq_exit_mouse]
 }
 func (esc *EscapeSeqs) Fg(a Attribute) string {
-//	return fmt.Sprintf("%s%d%s", "\033[38;5;", uint64(a-1), "m")
+	//	return fmt.Sprintf("%s%d%s", "\033[38;5;", uint64(a-1), "m")
 	return fmt.Sprintf("%s%d%s", "\x1b[;", uint64(a-1), "m")
 }
 func (esc *EscapeSeqs) Bg(a Attribute) string {
-//	return fmt.Sprintf("%s%d%s", "\033[48;5;", uint64(a-1), "m")
+	//	return fmt.Sprintf("%s%d%s", "\033[48;5;", uint64(a-1), "m")
 	return fmt.Sprintf("%s%d%s", "\x1b[;", uint64(a-1), "m")
 }

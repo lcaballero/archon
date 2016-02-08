@@ -1,6 +1,5 @@
 package view
 
-
 type Position interface {
 	Pos() (int, int)
 }

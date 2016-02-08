@@ -1,22 +1,23 @@
 package view
 
 import (
-	"github.com/lcaballero/archon/internal/grid"
-	"github.com/lcaballero/archon/internal/sys/terminal"
 	"fmt"
 	"log"
 	"strings"
+
+	"github.com/lcaballero/archon/internal/grid"
+	"github.com/lcaballero/archon/internal/sys/terminal"
 )
 
-type StatusLine struct{
-	name string
+type StatusLine struct {
+	name   string
 	cursor Position
 }
 
 func NewStatusLine(name string, c Position) *StatusLine {
 	return &StatusLine{
-		name: name,
-		cursor:c,
+		name:   name,
+		cursor: c,
 	}
 }
 
@@ -40,7 +41,7 @@ func (u *StatusLine) Render(v *ViewAtts, wr grid.GridWriter) error {
 
 	str := []byte(status)
 	for i, b := range str {
-		c := grid.Cell{ Byte:b }
+		c := grid.Cell{Byte: b}
 		if i < len(str) {
 			c.Bg = terminal.ColorWhite
 			c.Fg = terminal.ColorBlack
