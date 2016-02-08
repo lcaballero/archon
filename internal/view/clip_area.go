@@ -3,7 +3,7 @@ package view
 import (
 	"fmt"
 
-	"github.com/lcaballero/archon2/internal/grid"
+	"github.com/lcaballero/archon/internal/grid"
 )
 
 // ClipArea constrains writing bytes to the GridWriter and translated

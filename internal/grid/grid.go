@@ -2,7 +2,7 @@ package grid
 
 import (
 	"io"
-	"github.com/lcaballero/archon2/internal/terminal"
+	"github.com/lcaballero/archon/internal/sys/terminal"
 	"bytes"
 )
 

@@ -1,8 +1,8 @@
 package view
 
 import (
-	"github.com/lcaballero/archon2/internal/grid"
-	"github.com/lcaballero/archon2/internal/terminal"
+	"github.com/lcaballero/archon/internal/grid"
+	"github.com/lcaballero/archon/internal/sys/terminal"
 	"fmt"
 	"log"
 	"strings"

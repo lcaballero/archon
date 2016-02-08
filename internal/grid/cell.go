@@ -1,5 +1,5 @@
 package grid
-import "github.com/lcaballero/archon2/internal/terminal"
+import "github.com/lcaballero/archon/internal/sys/terminal"
 
 type Cell struct {
 	Byte byte

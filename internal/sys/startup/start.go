@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/lcaballero/archon2/internal/editor"
-	"github.com/lcaballero/archon2/internal/terminal"
+	"github.com/lcaballero/archon/internal/editor"
+	"github.com/lcaballero/archon/internal/sys/terminal"
 )
 
 func Start() {
