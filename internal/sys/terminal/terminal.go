@@ -10,6 +10,7 @@ import (
 	"syscall"
 
 	"github.com/lcaballero/archon/internal/sys/term_sys"
+	"time"
 )
 
 type Terminal struct {
@@ -135,7 +136,9 @@ func (t *Terminal) forwardEvents() chan Event {
 
 // renderWritable
 func (t *Terminal) renderWritable() chan io.WriterTo {
-	writerTo := make(chan io.WriterTo, 1)
+	writerTo := make(chan io.WriterTo)
+	awaiting := make(chan io.WriterTo, 1)
+	var last int64 = 0
 
 	go func() {
 		for {
@@ -143,8 +146,32 @@ func (t *Terminal) renderWritable() chan io.WriterTo {
 			case wg := <-t.quitWriting:
 				wg.Done()
 				return
-			case to := <-writerTo:
+
+			case to := <-awaiting:
+				log.Println("awaiting being writen")
+				a := len(writerTo)
+				if a > 0 {
+					for next := range writerTo {
+						to = next
+					}
+				}
 				to.WriteTo(t.termOut)
+				last = time.Now().UnixNano()
+
+			case to := <-writerTo:
+				now := time.Now().UnixNano()
+				elapsed := now - last
+				if time.Duration(elapsed) > time.Millisecond {
+					log.Println("beyond elapsed")
+					to.WriteTo(t.termOut)
+					last = time.Now().UnixNano()
+				} else {
+					log.Println("send to awaiting")
+					awaiting <- to
+				}
+
+				log.Printf("awaiting: %d, last: %d, elapsed: %d",
+					len(writerTo), last, elapsed)
 			}
 		}
 	}()
@@ -152,7 +179,8 @@ func (t *Terminal) renderWritable() chan io.WriterTo {
 	return writerTo
 }
 
-// Start() starts the terminal sending system notification via the returned channels.
+// Start() starts the terminal sending system notification via the
+// returned channels.
 func (t *Terminal) Start() (chan Event, chan io.WriterTo) {
 	esc := t.escapes
 	t.WriteAll(

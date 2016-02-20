@@ -62,7 +62,6 @@ func (d *EditController) Handle(ev terminal.Event) error {
 		d.fullView.Render(d.atts, d.grid)
 		d.onRender <- grid.CopyGrid(d.grid)
 	}
-
 	return nil
 }
 

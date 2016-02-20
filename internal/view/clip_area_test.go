@@ -12,14 +12,14 @@ func TestClipArea(t *testing.T) {
 	Convey("Set byte to negative y", t, func() {
 		g := &grid.Grid{}
 		c, _ := NewClipArea(g, 0, 0, 10, 10)
-		err := c.Set(0, -1, 'b')
+		err := c.Set(0, -1, grid.Cell{Byte:'b'})
 		So(err, ShouldNotBeNil)
 	})
 
 	Convey("Set byte to negative x", t, func() {
 		g := &grid.Grid{}
 		c, _ := NewClipArea(g, 0, 0, 10, 10)
-		err := c.Set(-1, 0, 'b')
+		err := c.Set(-1, 0, grid.Cell{Byte:'b'})
 		So(err, ShouldNotBeNil)
 	})
 
