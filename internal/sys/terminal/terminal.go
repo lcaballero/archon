@@ -136,9 +136,12 @@ func (t *Terminal) forwardEvents() chan Event {
 
 // renderWritable
 func (t *Terminal) renderWritable() chan io.WriterTo {
-	writerTo := make(chan io.WriterTo)
-	awaiting := make(chan io.WriterTo, 1)
-	var last int64 = 0
+	writerTo := make(chan io.WriterTo, 5)
+	awaiting := make(chan io.WriterTo, 100)
+
+	// 110ms is magic, haven't figured out how to better
+	// v-sync the write possibly with better buffer writing.
+	flushTic := time.NewTicker(110*time.Millisecond).C
 
 	go func() {
 		for {
@@ -147,31 +150,22 @@ func (t *Terminal) renderWritable() chan io.WriterTo {
 				wg.Done()
 				return
 
-			case to := <-awaiting:
-				log.Println("awaiting being writen")
-				a := len(writerTo)
-				if a > 0 {
-					for next := range writerTo {
+			case <-flushTic:
+				var to io.WriterTo = nil
+				if len(awaiting) > 0 {
+					for next := range awaiting {
 						to = next
+						if len(awaiting) == 0 {
+							break
+						}
 					}
 				}
-				to.WriteTo(t.termOut)
-				last = time.Now().UnixNano()
-
-			case to := <-writerTo:
-				now := time.Now().UnixNano()
-				elapsed := now - last
-				if time.Duration(elapsed) > time.Millisecond {
-					log.Println("beyond elapsed")
+				if to != nil {
 					to.WriteTo(t.termOut)
-					last = time.Now().UnixNano()
-				} else {
-					log.Println("send to awaiting")
-					awaiting <- to
 				}
 
-				log.Printf("awaiting: %d, last: %d, elapsed: %d",
-					len(writerTo), last, elapsed)
+			case to := <-writerTo:
+				awaiting <- to
 			}
 		}
 	}()
