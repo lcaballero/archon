@@ -5,8 +5,8 @@ import (
 	"log"
 	"sync"
 
-	"github.com/lcaballero/archon2/internal/terminal"
-	"github.com/lcaballero/archon2/internal/view"
+	"github.com/lcaballero/archon/internal/terminal"
+	"github.com/lcaballero/archon/internal/view"
 )
 
 type Editor struct {

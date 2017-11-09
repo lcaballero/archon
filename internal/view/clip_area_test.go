@@ -3,7 +3,7 @@ package view
 import (
 	"testing"
 
-	"github.com/lcaballero/archon2/internal/grid"
+	"github.com/lcaballero/archon/internal/grid"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

@@ -1,6 +1,6 @@
 package editor
 
-import "github.com/lcaballero/archon2/internal/view"
+import "github.com/lcaballero/archon/internal/view"
 
 type EditModel struct {
 	documents []interface{}  // all open buffers

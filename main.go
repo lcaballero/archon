@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/lcaballero/archon2/internal/startup"
+	"github.com/lcaballero/archon/internal/startup"
 )
 
 func main() {

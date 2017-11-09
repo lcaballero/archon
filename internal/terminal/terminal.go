@@ -9,7 +9,7 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/lcaballero/archon2/internal/term_sys"
+	"github.com/lcaballero/archon/internal/term_sys"
 )
 
 type Terminal struct {

@@ -1,8 +1,8 @@
 package editor
 
 import (
-	"github.com/lcaballero/archon2/internal/grid"
-	"github.com/lcaballero/archon2/internal/view"
+	"github.com/lcaballero/archon/internal/grid"
+	"github.com/lcaballero/archon/internal/view"
 )
 
 type Document struct {

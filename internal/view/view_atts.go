@@ -1,7 +1,7 @@
 package view
 
 import (
-	"github.com/lcaballero/archon2/internal/grid"
+	"github.com/lcaballero/archon/internal/grid"
 )
 
 
